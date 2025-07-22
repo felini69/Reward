@@ -1,0 +1,93 @@
+
+
+{% load static %}
+{% block content %}
+
+  {# --- 1. Hero / MainContainer Section --- #}
+  {% for hero in first_container %}
+    <section class="hero">
+      <div class="hero__text">
+        <h1>{{ hero.title | safe }}</h1>
+        {% if hero.ImageSecondTitle %}
+          <h2>{{ hero.ImageSecondTitle }}</h2>
+        {% endif %}
+      </div>
+      {% if hero.image %}
+        <div class="hero__image">
+          <img src="{{ hero.image.url }}" alt="{{ hero.ImageMainTitle }}">
+        </div>
+      {% endif %}
+    </section>
+  {% endfor %}
+
+
+  {# --- 2. Programs / SecondContainer Section --- #}
+  <section id="programs">
+    {% for container in second_tabs %}
+      <div class="program-container">
+        <div class="program-header">
+          <h3>{{ container.ImageMainTitle|safe }}</h3>
+          {% if container.ImageSecondTitle %}
+            <p>{{ container.ImageSecondTitle|safe }}</p>
+          {% endif %}
+          {% if container.image %}
+            <img src="{{ container.image.url }}" alt="{{ container.ImageMainTitle }}">
+          {% endif %}
+        </div>
+
+        <div class="program-list">
+          {# this is your “inline” posts loop #}
+          {% for post in container.posts.all %}
+            {% if post.is_active %}
+              <div class="program-item">
+                <h4>{{ post.Firsttitle }}</h4>
+                {% if post.SecondTitle %}
+                  <h5>{{ post.SecondTitle }}</h5>
+                {% endif %}
+                {% if post.description %}
+                  <p>{{ post.description }}</p>
+                {% endif %}
+                {% if post.icon %}
+                  <img src="{{ post.icon.url }}" alt="{{ post.Firsttitle }}">
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+
+
+  {# --- 3. Features / thridContainer Section --- #}
+  <section id="features">
+    {% for container in third_tabs %}
+      <div class="features-container">
+        <div class="features-header">
+          <h3>{{ container.ImageMainTitle }}</h3>
+          {% if container.ImageSecondTitle %}
+            <p>{{ container.ImageSecondTitle }}</p>
+          {% endif %}
+          {% if container.image %}
+            <img src="{{ container.image.url }}" alt="{{ container.ImageMainTitle }}">
+          {% endif %}
+        </div>
+
+        <ul class="features-list">
+          {# again, your inline posts #}
+          {% for feature in container.posts.all %}
+            {% if feature.is_active %}
+              <li class="feature-item">
+                <strong>{{ feature.title }}</strong>
+                {% if feature.description %}
+                  <p>{{ feature.description }}</p>
+                {% endif %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </section>
+
+{% endblock %}

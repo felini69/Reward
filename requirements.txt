@@ -1,0 +1,6 @@
+Django==5.2
+Pillow==11.1.0
+django-tinymce==4.1.0
+django-unfold==0.62.0
+django-mptt-admin==2.8.0
+django-mptt==0.17.0
