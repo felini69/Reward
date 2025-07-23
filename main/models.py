@@ -206,37 +206,3 @@ class TenthContainer(BaseModel):
 
     def __str__(self):
         return self.title
-    
-
-
-
-
-### Edditional class models for logo and ficon ###
-class Logo(models.Model):
-    """ Логотип сайта """
-    image = models.ImageField(verbose_name='Логотип', upload_to='logo/')
-    is_active = models.BooleanField(verbose_name='Активен', default=True)
-    created_at = models.DateTimeField(verbose_name='Создано в', auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name='Обновлено в', auto_now=True)
-
-    class Meta:
-        verbose_name = "Логотип"
-        verbose_name_plural = "Логотипы"
-
-    def __str__(self):
-        return "Логотип сайта"
-    
-
-class Favicon(models.Model):
-    """ Фавикон сайта """
-    ficon = models.ImageField(verbose_name='Фавикон', upload_to='favicon/')
-    is_active = models.BooleanField(verbose_name='Активен', default=True)
-    created_at = models.DateTimeField(verbose_name='Создано в', auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name='Обновлено в', auto_now=True)
-
-    class Meta:
-        verbose_name = "Фавикон"
-        verbose_name_plural = "Фавиконы"
-
-    def __str__(self):
-        return "Фавикон сайта"

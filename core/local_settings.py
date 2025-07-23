@@ -41,8 +41,8 @@ INSTALLED_APPS = [
 
     ### 3rd Party Apps ###
     'tinymce',
-    # 'mptt',
-    # 'django_mptt_admin',
+    'mptt',
+    'django_mptt_admin',
 
 ]
 
@@ -192,6 +192,21 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Меню",
+                "icon": "settings",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Главное меню",
+                        "link": reverse_lazy("admin:menu_menuitem_changelist"),
+                    },
+                    {
+                        "title": "Нижнее меню",
+                        "link": reverse_lazy("admin:menu_footermenu_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": "Сообщения",
                 "icon": "settings",
                 "collapsible": True,
@@ -209,17 +224,18 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Логотип",
-                        "link": reverse_lazy("admin:main_logo_changelist"),
+                        "link": reverse_lazy("admin:menu_logo_changelist"),
                     },
                     {
                         "title": "Фавикон",
-                        "link": reverse_lazy("admin:main_favicon_changelist"),
+                        "link": reverse_lazy("admin:menu_favicon_changelist"),
                     },
                 ],
             },
         ],
     }
 }
+
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 260,
