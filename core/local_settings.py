@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     ### My Apps ###
     'main',
     'menu',
+    'contact',
 
     ### 3rd Party Apps ###
     'tinymce',
@@ -143,7 +144,7 @@ UNFOLD = {
         "show_search": True,
         "navigation": [
             {
-                "title": "контейнер",
+                "title": "Контейнеры",
                 "icon": "location_on",
                 "collapsible": True,
                 "items": [
@@ -191,6 +192,17 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Сообщения",
+                "icon": "settings",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Сообщения",
+                        "link": reverse_lazy("admin:contact_contact_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": "Дополнительные настройки",
                 "icon": "settings",
                 "collapsible": True,
@@ -204,7 +216,7 @@ UNFOLD = {
                         "link": reverse_lazy("admin:main_favicon_changelist"),
                     },
                 ],
-            }
+            },
         ],
     }
 }
