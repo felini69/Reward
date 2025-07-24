@@ -4,7 +4,7 @@ from tinymce.widgets import TinyMCE
 
 class BaseModel(models.Model):
     """ Базовая модель для контейнеров """
-    title = models.CharField(verbose_name='основной заголовок', max_length=500)
+    title = models.CharField(verbose_name='основной заголовок', max_length=1000)
     image = models.ImageField(verbose_name='изображение', upload_to='page_image')
     is_active = models.BooleanField(verbose_name='Активен', default=True)
     created_at = models.DateTimeField(verbose_name='Создано в', auto_now_add=True)

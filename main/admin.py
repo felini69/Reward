@@ -101,6 +101,11 @@ class FourthContainerAdmin(ModelAdmin, FormfieldesMixin):
 class FivethContainerCardsInlines(TabularInline):
     model = FivethContainerCards
     extra = 1
+    fields = (
+        'first_title',
+        'description',
+        'is_active',
+    )
 
 
 @admin.register(FivethContainer)

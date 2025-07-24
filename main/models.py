@@ -19,7 +19,7 @@ class SecondContainer(BaseModel):
     class Meta:
         verbose_name = "02 Второй контейнер"
         verbose_name_plural = "02 Второй контейнер"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.title
@@ -34,7 +34,7 @@ class SecondContainerCards(BaseCards):
     class Meta:
         verbose_name = "cards для второго контейнера"
         verbose_name_plural = "cards  для второго контейнера"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.first_title
@@ -59,10 +59,10 @@ class ThirdContainerCards(BaseCards):
     class Meta:
         verbose_name = "cards для третьего контейнера"
         verbose_name_plural = "cards для третьего контейнера"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
-        return self.title
+        return self.first_title
     
 
 class FourthContainer(BaseModel):
@@ -83,7 +83,7 @@ class FourthContainerCards(BaseCards):
     class Meta:
         verbose_name = "cards в четвертом контейнере"
         verbose_name_plural = "cards в четвертом контейнере"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.first_title
@@ -109,7 +109,7 @@ class FivethContainerCards(BaseCards):
     class Meta:
         verbose_name = "cards в пятом контейнере"
         verbose_name_plural = "cards в пятом контейнере"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.first_title
@@ -118,8 +118,8 @@ class FivethContainerCards(BaseCards):
 
 class SixthContainer(BaseModel):
     """ Шестой контейнер, наследуется от BaseModel """
-    description_1 = models.CharField(verbose_name='Описание 1', max_length=500)
-    description_2 = models.CharField(verbose_name='Описание 2', max_length=500)
+    description_1 = models.CharField(verbose_name='Описание 1', max_length=800)
+    description_2 = models.CharField(verbose_name='Описание 2', max_length=800)
     class Meta:
         verbose_name = "06 Шестой контейнер"
         verbose_name_plural = "06 Шестой контейнер"
@@ -137,7 +137,7 @@ class SixthContainerCards(BaseCards):
     class Meta:
         verbose_name = "cards в шестом контейнере"
         verbose_name_plural = "cards в шестом контейнере"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.first_title
@@ -146,8 +146,8 @@ class SixthContainerCards(BaseCards):
 
 class SeventhContainer(BaseModel):
     """ Седьмой контейнер, наследуется от BaseModel """
-    description_1 = models.CharField(verbose_name='Описание 1', max_length=500)
-    description_2 = models.CharField(verbose_name='Описание 2', max_length=500)
+    description_1 = models.CharField(verbose_name='Описание 1', max_length=800)
+    description_2 = models.CharField(verbose_name='Описание 2', max_length=1000)
     class Meta:
         verbose_name = "07 Седьмой контейнер"
         verbose_name_plural = "07 Седьмой контейнер"
@@ -168,7 +168,7 @@ class SeventhContainerCards(models.Model):
     class Meta:
         verbose_name = "cards в седьмом контейнере"
         verbose_name_plural = "cards в седьмом контейнере"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.first_title

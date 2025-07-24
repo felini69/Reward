@@ -45,24 +45,19 @@
               id="navbarNav"
             >
               <ul class="navbar-nav">
+                {% for item in menu %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="#{{ item.container_id }}">{{ item.title }}</a>
+                  </li>
+                {% endfor %}
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#"
                     >ГЛАВНАЯ</a
                   >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">ПРОГРАММЫ</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">ПЛАТФОРМА</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">НАГРАДЫ</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">КОНТАКТЫ</a>
-                </li>
+                </li> -->
+
+
               </ul>
             </div>
           </div>
@@ -77,19 +72,7 @@
         <div class="col-12 col-md-12 col-lg-3">
           <ul class="list-unstyled text-start lh-lg">
             <li>
-              ООО ПАРТНЕР
-            </li>
-            <li>
-              ИНН 9701183454
-            </li>
-            <li>
-              ОГРН 1217700406770
-            </li>
-            <li>
-              Москва, Переведеновский переулок,
-            </li>
-            <li>
-            дом 13, стр. 4
+              {{ footer.Left | safe}}
             </li>
           </ul>
         </div>
