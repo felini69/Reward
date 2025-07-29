@@ -1,8 +1,631 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load custom_filters %}
 
 {% block content %}
-    <!-- Reward -->
+<!-- section 1 -->
+<section class="section-1" id="1">
+  <div class="container border-h box-container">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <div class="box-content">
+          <div class="box-content-title">
+            <p>
+              MY <br />
+              <b>BONUS</b><br />
+              REWARD
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="box-image">
+          <img src="{{ first_container.image.url }}" width="100%" height="100%" alt="" />
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="box-widget">
+          <div class="box-widget-title">
+            {{ first_container.title | safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="box-border">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+              style="fill: rgba(6, 21, 85, 0.87)"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- section 2 -->
+<section class="section-2" id='2'>
+  {% for item in second_container %}
+  <div class="container pt-4 box-container">
+    <div class="row flex-wrap-reverse  md-lg-6">
+      <div class="col-12 col-lg-8">
+        <section class="box-tow">
+          <div class="box-content-image" style='height: 387px;'>
+            <img src="{{ item.image.url }}" width="100%" height="100%" alt="" />
+          </div>
+        </section>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="box-content-tow mb-md-5">
+          <div class="box-content-title font-size-tow">
+            <p>
+              {{ item.title | safe }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Card desktop -->
+  <div class="container-fluid bg-skyblue d-flex disp justify-content-center">
+    <div class="row text-center align-items-center h-100">
+      {% for card in item.cards.all %}
+      <div class="col">
+        <div class="box-content-section text-center">
+          <div class="box-content-image ">
+            <img width="60px" height="60px" src="{{ card.icon.url }}" alt="">
+          </div>
+          <p>{{ card.first_title }}</p>
+          <p>{{ card.second_title }}</p>
+          <p>{{ card.description }}</p>
+          <div class="box-content-button">
+            <img src="{% static 'img/card_icon.png' %}" alt="" srcset="" />
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- Card mobile -->
+  <div class="container">
+    <div class="row my-accordion">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        {% for card in item.cards.all %}
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="flush-collapse{{ forloop.counter }}">
+              {{ card.second_title }}
+            </button>
+          </h2>
+          <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse " data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              {{ card.description }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="box-border">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+              style="fill: rgba(6, 21, 85, 0.87)"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="icon-mobile text-center">
+    <img src="{% static 'img/icon6.png' %}" width="100px" height="100px" alt="">
+  </div>
+  {% endfor %}
+</section>
+<!-- section 3 -->
+<section class="section-3" id='3'>
+  {% for item in third_container %}
+  <div class="widget-container">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 section-image-md">
+          <div class="section-left-md">
+            <p>
+              MY <br />
+              <b>BONUS</b><br />
+              REWARD
+            </p>
+          </div>
+          <img src="{{ item.image.url }}" alt="" />
+          <div class="section-right-md">
+            <p>
+              {{ item.title | safe }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <!-- desktop -->
+    <div class="row widget  g-2">
+      {% for card in item.cards.all %}
+      <div class="col">
+        <div class="card-widget">
+          <div class="title-widget">
+            <p>{{ card.first_title | safe }}</p>
+          </div>
+          <div class="desc-widget">
+            <p>
+              {{ card.description | safe }}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- mobile -->
+    <div class="row custom-mobile">
+      {% for card in item.cards.all %}
+      <div class="widget-mobile">
+        <div class="border-widget"></div>
+        <div class="widget-text">
+          <p>{{ card.first_title }}</p>
+          <p>
+            {{ card.description | safe }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="icon-mobile text-center" style="margin-top: -116px;margin-bottom: 130px;">
+      <img src="{% static 'img/icon8.png' %}" width="100px" height="100px" alt="">
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="box-border">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+              style="fill: rgba(6, 21, 85, 0.87)"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+<!-- section 4 -->
+<section class="section-4" id='4'>
+  {% for item in fourth_container %}
+  <div class="section-four mt-md-5 ms-lg-5">
+    <div class="container">
+      <div class="row ms-lg-5">
+        <div class="col-12 d-flex justify-content-center align-items-center ms-lg-5">
+          <div class="section-four-main ms-lg-5">
+            <div class="section-four-right position-relative">
+              <img src="{{ item.image.url }}" width="100%" height="100%" alt="" />
+              <div class="section-four-left position-absolute top-50 start-0 translate-middle">
+                <p>
+                  ВСЕ ПРОСТО<br />
+                  <b>НЕ НАДО</b><br />
+                  УСЛОЖНЯТЬ
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="section-four-title text-center mt-5">
+            {{ item.description | safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-five">
+    <!-- Desktop -->
+    <div class="container-fluid bg-skyblue justify-content-center d-lg-flex" style="height: 347px">
+      <div class="row align-items-center h-100">
+        {% for card in item.cards.all %}
+        <div class="col">
+          <div class="box-content-section-five text-center">
+            <div class="box-content-image">
+              <img src="{{ card.icon.url }}" alt="" />
+            </div>
+            <p>
+              {{ card.first_title }}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Card mobile -->
+    {% load custom_filters %}
+    <div class="container">
+      <div class="row my-accordion">
+        <div class="accordion accordion-flush" id="accordionFlushExample1">
+          {% for card in item.cards.all %}
+          {% with card.first_title|split:" " as words %}
+          {% if forloop.counter == 1 or forloop.counter == 2 %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                {{ words|slice:":2"|join:" " }}
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample1">
+              <div class="accordion-body">
+                <p>{{ words|slice:"2:"|join:" " }}</p>
+              </div>
+            </div>
+          </div>
+
+          {% elif forloop.counter == 3 or forloop.counter == 4 %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                {{ words|slice:":4"|join:" " }}
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <p>{{ words|slice:"4:"|join:" " }}</p>
+              </div>
+            </div>
+          </div>
+          {% elif forloop.counter == 5 %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapsethree" aria-expanded="false" aria-controls="flush-collapsethree">
+                {{ words|slice:":3"|join:" " }}
+              </button>
+            </h2>
+            <div id="flush-collapse3" class="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <p>МОМЕНТАЛЬНОЕ ЗАЧИСЛЕНИЕ</p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endwith %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="box-border">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+                style="fill: rgba(6, 21, 85, 0.87)"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="icon-mobile text-center">
+    <img src="{% static 'img/icon2.png' %}" width="100px" height="100px" alt="">
+  </div>
+  {% endfor %}
+</section>
+<!--section 5 -->
+<section class="section-5" id='5'>
+  {% for item in fifth_container %}
+  <div class="section-six">
+    <div class="container">
+      <div class="row mt-5 mb-5 ">
+        <div class="col-12 col-lg-8 offset-lg-1">
+          <div class="section-six-image d-flex justify-content-center position-relative">
+            <img src="{{ item.image.url }}" width="100%" height="100%" alt="" />
+            <div
+              class="section-six-image-content position-absolute top-50 start-100 translate-middle d-flex align-items-center">
+              {{ item.title | safe }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center ">
+        {% for card in item.cards.all %}
+        {% if forloop.counter == 1 %}
+        <div class="col-12 col-lg-5">
+          <div class="section-six-box">
+            <div class="section-six-box-title rounded-top-4 d-flex align-items-center justify-content-center">
+              <p class="m-0">{{ card.first_title }}</p>
+            </div>
+            <div class="section-six-box-desc rounded-bottom-4">
+              <p>{{ card.description }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center mb-md-3 mb-sm-5">
+          <div class="section-six-and rounded-circle d-flex align-items-center justify-content-center">
+            <p class="m-0">ИЛИ</p>
+          </div>
+        </div>
+        {% elif forloop.counter == 2 %}
+        <div class="col-12 col-lg-5 mb-md-5 mb-lg-0">
+          <div class="section-six-box  mb-md-5 mb-lg-0">
+            <div class="section-six-box-title rounded-top-4 d-flex align-items-center justify-content-center">
+              <p class="m-0">{{ card.first_title }}</p>
+            </div>
+            <div class="section-six-box-desc rounded-bottom-4">
+              <p>{{ card.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="row mb-5 section-six-header">
+        <div class="col-12 mt-lg-5">
+          <div class="box-border">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+                style="fill: rgba(6, 21, 85, 0.87)"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+<!-- section 6 -->
+<section class="section-6" id='6'>
+  {% for item in sixth_container %}
+  <div class="section-seven mb-5">
+    <div class="container">
+      <div class="row mb-5 gy-1 gx-2">
+        <div class="col-12 col-lg-4 offset-lg-1 d-flex align-items-end justify-content-center">
+          <div class="section-seven-box ">
+            <div class="section-seven-box-title rounded-4 p-3">
+              <p>{{ item.description_1 | safe }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-7">
+          <div class="section-seven-box-image d-flex  justify-content-center position-relative me-lg-5">
+            <img src="{{ item.image.url }}" alt="" />
+            <div
+              class="section-seven-box-image-content position-absolute top-0 start-0 translate-middle-y d-flex align-items-center">
+              {{ item.title | safe }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ms-lg-5">
+        <div class="col-12">
+          <div class="section-seven-title">
+            <p>{{ item.description_2 | safe }}</p>
+          </div>
+          <div class="section-seven-title-mobile">
+              <h2>от продавца до покупателя, от сотрудника до заказчика.</h2>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-nine mb-5">
+    <div class="container-fluid bg-skyblue-nine margins" style="height: 360px; ">
+      <div class="row mt-lg-5">
+        <div class="col-12 text-center mt-5 mb-3">
+          <h1>выбирайте mybonusreward brand2busines:
+          </h1>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          {% for card in item.cards.all %}
+          {% if forloop.counter == 1 %}
+          <div class="col-12 col-lg-5">
+            <div class="section-nine-box d-flex justify-content-center align-items-center">
+              <img src="{{ card.icon.url }}" alt="">
+              <h5>{{ card.first_title | safe }}</h5>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center mb-md-3 mb-sm-5">
+            <div class="section-nine-and rounded-circle d-flex align-items-center justify-content-center">
+              <p class="m-0">&</p>
+            </div>
+          </div>
+          {% elif forloop.counter == 2 %}
+          <div class="col-12 col-lg-5">
+            <div class="section-nine-box d-flex justify-content-center align-items-center">
+              <img src="{{ card.icon.url }}" alt="">
+              <h5>{{ card.first_title | safe }}</h5>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="container mb-5" style="margin-top: -62px;">
+    <div class="box-border">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+        <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z" style="fill: rgba(6, 21, 85, 0.87)">
+        </path>
+      </svg>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+<!-- section 7 -->
+<section class="section-7" id='7'>
+  {% for item in seventh_container %}
+  <div class="section-seven section-seven-one mb-md-5">
+    <div class="container">
+      <div class="row mb-md-5 gy-1 gx-2">
+        <div class="col-12 col-lg-7  offset-lg-1 ">
+          <div class="section-seven-box-image d-flex justify-content-center position-relative ">
+            <img src="{{ item.image.url }}" alt="" />
+            <div
+              class=" section-nine-box-image-content position-absolute top-0 end-0 translate-middle-y d-flex align-items-center">
+              <p>{{ item.title | safe }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 
+              d-flex justify-content-center 
+              align-self-start  ">
+          <div class="ection-seven-box w-100">
+            <div class="section-seven-box-title rounded-4 p-3 mobile-box">
+              <p>{{ item.description_1 | safe }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row ms-lg-5">
+        <div class="col-12">
+          <div class="section-seven-title">
+            <p>{{ item.description_2 | safe }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-nine mb-5">
+    <div class="container-fluid bg-skyblue-nine" style="height: 300px;">
+      <div class="row">
+        <div class="col-12 text-center mt-5 mb-3">
+          <h1>выбирайте mybonusreward brand2busines:
+          </h1>
+        </div>
+
+      </div>
+      <div class="container ">
+        {% for card in item.cards.all %}
+        {% if forloop.counter == 1 %}
+        <div class="row ">
+          <div class="col-12 col-lg-5 ">
+            <div class="section-nine-box d-flex justify-content-center align-items-center">
+              <img src="{{ card.icon.url }}" alt="">
+              <h5>{{ card.first_title | safe }}</h5>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center mb-md-3 mb-sm-5">
+            <div class="section-nine-and rounded-circle d-flex align-items-center justify-content-center">
+              <p class="m-0">&</p>
+            </div>
+          </div>
+          {% elif forloop.counter == 2 %}
+          <div class="col-12 col-lg-5 ">
+            <div class="section-nine-box d-flex justify-content-center align-items-center ">
+              <img src="{{ card.icon.url }}" alt="">
+              <h5>{{ card.first_title | safe }}</h5>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="container mb-5" style="margin-top: -62px;">
+    <div class="box-border">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+        <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z" style="fill: rgba(6, 21, 85, 0.87)">
+        </path>
+      </svg>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+<!-- section 8 -->
+<section class="section-8" id="8">
+  <div class="section-eight">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section-eight-image">
+            <img src="{{ eighth_container.image.url }}" alt="">
+            <div class="section-eight-image-content position-absolute top-00 start-0 d-flex align-items-center">
+              <p>{{ eighth_container.title | safe }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="section-eight-des">
+            {{ eighth_container.mobile_description |safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-ten">
+      <div class="container-fluid bg-skyblue mb-5 border-bottom " style="height: 365px;">
+        <div class="row "></div>
+      </div>
+      <div class="container mb-5" style="margin-top: -62px;" id="3">
+        <div class="box-border">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+              style="fill: rgba(6, 21, 85, 0.87)"></path>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+</section>
+<!-- section 9 -->
+<section class="section-9" id="9">
+  <div class="section-eleven mt-5 mb-5">
+    <div class="container ">
+      <div class="row  justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="section-eleven-title ">
+            <p>МЫ ВОЗНАГРАЖДАЕМ</p>
+            <p>НАС НАГРАЖДАЮТ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center mt-md-5 text-info">
+        {% for item in ninth_container %}
+          <div class="col-12 col-md-12 col-lg-6">{{ item.title | safe }}
+            <div class="col-12 col-lg-12 mt-5">
+              <img src="{{ item.image.url }}" width="100%" alt="">
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mt-5 mb-5">
+      <div class="col-12">
+        <div class="box-border">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
+              style="fill: rgba(6, 21, 85, 0.87)"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- section 10 -->
+<section class="section-10" id="10">
+  <div class="section-twelve">
     <div class="container border-h box-container">
       <div class="row">
         <div class="col-12 col-lg-6">
@@ -17,936 +640,75 @@
           </div>
         </div>
         <div class="col-12 col-lg-6">
-          <div class="box-image">
-            <img src="{% static 'img/box-1.png' %}" width="100%" height="100%" alt="" />
+          <div class="box-image widget-image ">
+            <img src="{{ tenth_container.image.url }}" width="100%" height="100%" alt="" />
           </div>
         </div>
         <div class="col-12 col-lg-6">
           <div class="box-widget">
-            <div class="box-widget-title">
-              <p>БОЛЕЕ 20 ЛЕТ</p>
-              <p>МЫ ВОЗНАГРАЖДАЕМ <br />ЛЮДЕЙ</p>
+            <div class="box-widget-title widget-title">
+              <p>КОНТАКТЫ</p>
+              <p>{{ tenth_container.title | safe }}</p>
             </div>
+
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="row">
+      <div class="row justify-content-center mt-5 text-center">
         <div class="col-12">
-          <div class="box-border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1000 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                class="elementor-shape-fill"
-                d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-                style="fill: rgba(6, 21, 85, 0.87)"
-              ></path>
-            </svg>
-          </div>
+          <button class="btn btn-info text-white fs-6 fw-semibold rounded-5 px-4" data-bs-target="#exampleModalToggle"
+            data-bs-toggle="modal">ОСТАВИТЬ ЗАЯВКУ</button>
         </div>
       </div>
     </div>
-    <div class="container pt-4 box-container">
-      <div class="row flex-wrap-reverse">
-        <div class="col-12 col-lg-8">
-          <section class="box-tow">
-            <div class="box-content-image">
-              <img
-                src="{% static 'img/image1.png' %}"
-                width="100%"
-                height="100%"
-                alt=""
-              />
-            </div>
-          </section>
-        </div>
-        <div class="col-12 col-lg-4">
-          <div class="box-content-tow mb-md-5">
-            <div class="box-content-title font-size-tow">
-              <p>
-                БЛАГОДАРНОСТЬ <br />
-                ЭТО…
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Card desktop -->
-    <div class="container-fluid bg-skyblue d-flex disp justify-content-center">
-      <div class="row text-center align-items-center h-100">
-        <div class="col">
-          <div class="box-content-section text-center">
-            <div class="box-content-image ">
-              <img width="60px" height="60px" src="{% static 'img/icon9.png' %}" alt="">
-            </div>
-            <p>НАГРАЖДАЙ СВОИХ, ЧТОБ ДРУГИЕ ПРИСОЕДИНЯЛИСЬ</p>
-            <p>Программа стимулирования</p>
-            <p>идеально работает в конкурентной среде</p>
-            <div class="box-content-button">
-              <img
-                src="{% static 'img/1bott-q3zhhrnjplee64zbykyyu4732ay7p3i852ko6cpxu8.png' %}"
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="box-content-section text-center">
-            <div class="box-content-image">
-               <img width="60px" height="60px" src="./src/img/icon4.png" alt="">
-              </svg>
-            </div>
-            <p>НАГРАЖДАЙ СВОИХ, ЧТОБ ДРУГИЕ ПРИСОЕДИНЯЛИСЬ</p>
-            <p>Программа стимулирования</p>
-            <p>идеально работает в конкурентной среде</p>
-            <div class="box-content-button">
-              <img
-                src="./src/img/1bott-q3zhhrnjplee64zbykyyu4732ay7p3i852ko6cpxu8.png"
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="box-content-section text-center">
-            <div class="box-content-image">
-              <img width="60px" height="60px" src="./src/img/icon6.png" alt="">
-            </div>
-            <p>НАГРАЖДАЙ СВОИХ, ЧТОБ ДРУГИЕ ПРИСОЕДИНЯЛИСЬ</p>
-            <p>Программа стимулирования</p>
-            <p>идеально работает в конкурентной среде</p>
-            <div class="box-content-button">
-              <img
-                src="./src/img/1bott-q3zhhrnjplee64zbykyyu4732ay7p3i852ko6cpxu8.png"
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="box-content-section text-center">
-            <div class="box-content-image">
-              <img width="60px" height="60px" src="./src/img/icon7.png" alt="">
+  </div>
 
-            </div>
-            <p>НАГРАЖДАЙ СВОИХ, ЧТОБ ДРУГИЕ ПРИСОЕДИНЯЛИСЬ</p>
-            <p>Программа стимулирования</p>
-            <p>идеально работает в конкурентной среде</p>
-            <div class="box-content-button">
-              <img
-                src="./src/img/1bott-q3zhhrnjplee64zbykyyu4732ay7p3i852ko6cpxu8.png"
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="box-content-section text-center">
-            <div class="box-content-image">
-              <img width="60px" height="60px" src="./src/img/icon9.png" alt="">
-            </div>
-            <p>НАГРАЖДАЙ СВОИХ, ЧТОБ ДРУГИЕ ПРИСОЕДИНЯЛИСЬ</p>
-            <p>Программа стимулирования</p>
-            <p>идеально работает в конкурентной среде</p>
-            <div class="box-content-button">
-              <img
-                src="./src/img/1bott-q3zhhrnjplee64zbykyyu4732ay7p3i852ko6cpxu8.png"
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Card mobile -->
-    <div class="container">
-      <div class="row my-accordion">
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
-              >
-                Accordion Item #111
-              </button>
-            </h2>
-            <div
-              id="flush-collapseOne"
-              class="accordion-collapse collapse show"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to
-                demonstrate the <code>.accordion-flush</code> class. This is the
-                first item’s accordion body.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwo"
-                aria-expanded="false"
-                aria-controls="flush-collapseTwo"
-              >
-                Accordion Item #2
-              </button>
-            </h2>
-            <div
-              id="flush-collapseTwo"
-              class="accordion-collapse collapse"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to
-                demonstrate the <code>.accordion-flush</code> class. This is the
-                second item’s accordion body. Let’s imagine this being filled
-                with some actual content.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseThree"
-                aria-expanded="false"
-                aria-controls="flush-collapseThree"
-              >
-                Accordion Item #3
-              </button>
-            </h2>
-            <div
-              id="flush-collapseThree"
-              class="accordion-collapse collapse"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to
-                demonstrate the <code>.accordion-flush</code> class. This is the
-                third item’s accordion body. Nothing more exciting happening
-                here in terms of content, but just filling up the space to make
-                it look, at least at first glance, a bit more representative of
-                how this would look in a real-world application.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="box-border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1000 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                class="elementor-shape-fill"
-                d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-                style="fill: rgba(6, 21, 85, 0.87)"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="icon-mobile text-center">
-        <img src="./src/img/icon6.png"  width="100px" height="100px" alt="">
-    </div>
-    <div class="widget-container">
+  <!-- Modal -->
 
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 section-image-md">
-            <div class="section-left-md">
-              <p>
-                MY <br />
-                <b>BONUS</b><br />
-                REWARD
-              </p>
-            </div>
-            <img src="./src/img/image2.png" alt="" />
-            <div class="section-right-md">
-              <p>
-                ГИЕ <br />
-                <b>БЫСТОГО</b><br />
-                ВОЗНАГРАЖДЕНИЯ
-              </p>
-            </div>
-          </div>
+  <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered custom-modal">
+      <div class="modal-content rounded-4">
+        <div class="modal-header justify-content-center position-relative rounded-top-4 py-3"
+          style="background-color:#08ADDC;">
+          <h1 class="modal-title fs-6 w-100 text-center" id="exampleModalToggleLabel">Мы рады новым партнерам</h1>
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3" style="filter: invert(1);"
+            data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body  rounded-bottom-5 border-3"
+          style="background-color: #efefef; color: #8c8c8c; border-color: #08ADDC; ">
+          <p class="fs-bold text-justify">
+            Пожалуйста, заполните нашу короткую форму, и один из менеджеров дружной команды свяжется с вами.
+          </p>
+          <form method="post" action="{% url 'main:main_page' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="form-label">Имя</label>
+              <input type="text" name="name" class="form-control border-dark-subtle" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" name="email" class="form-control border-dark-subtle" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="company" class="form-label">Компания</label>
+              <input type="text" name="company" class="form-control border-dark-subtle" id="company" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Сообщение</label>
+              <textarea name="message" class="form-control border-dark-subtle" id="message" rows="3" required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary rounded-4 mt-lg-5 mb-lg-5 fs-6 fw-medium"
+                style="background-color: #121f57;">Отправить</button>
+            </div>
+          </form>
+        </div>
+
       </div>
     </div>
-    <div class="container">
-      <!-- desktop -->
-      <div class="row widget mt-lg-5 g-2">
-        <div class="col">
-          <div class="card-widget">
-            <div class="title-widget">
-              <p>Скоростьи эффективность внедрения</p>
-            </div>
-            <div class="desc-widget">
-              <p>
-                Достаточно номера мобильного телефона или номера личной карты в
-                любом банке
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-widget">
-            <div class="title-widget">
-              <p>Скоростьи эффективность внедрения</p>
-            </div>
-            <div class="desc-widget">
-              <p>
-                Достаточно номера мобильного телефона или номера личной карты в
-                любом банке
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-widget">
-            <div class="title-widget">
-              <p>Скоростьи эффективность внедрения</p>
-            </div>
-            <div class="desc-widget">
-              <p>
-                Достаточно номера мобильного телефона или номера личной карты в
-                любом банке
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- mobile -->
-      <div class="row custom-mobile">
-        <div class="widget-mobile">
-          <div class="border-widget"></div>
-          <div class="widget-text">
-            <p>Скоростьи эффективность внедрения</p>
-            <p>
-              Готовый CRM-продукт работает 24/7 без географических ограничений
-            </p>
-          </div>
-        </div>
-        <div class="widget-mobile">
-          <div class="border-widget"></div>
-          <div class="widget-text">
-            <p>Скоростьи эффективность внедрения</p>
-            <p>
-              Готовый CRM-продукт работает 24/7 без географических ограничений
-            </p>
-          </div>
-        </div>
-        <div class="widget-mobile">
-          <div class="border-widget"></div>
-          <div class="widget-text">
-            <p>Скоростьи эффективность внедрения</p>
-            <p>
-              Готовый CRM-продукт работает 24/7 без географических ограничений
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="icon-mobile text-center" style="margin-top: -80px; margin-bottom: 150px;">
-        <img src="./src/img/icon8.png"  width="100px" height="100px" alt="">
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="box-border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1000 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                class="elementor-shape-fill"
-                d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-                style="fill: rgba(6, 21, 85, 0.87)"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section class="section-four mt-md-5 ms-lg-5">
-      <div class="container">
-        <div class="row ms-lg-5">
-          <div
-            class="col-12 d-flex justify-content-center align-items-center ms-lg-5"
-          >
-            <div class="section-four-main ms-lg-5">
-              <div class="section-four-right position-relative">
-                <img
-                  src="./src/img/image3.png"
-                  width="100%"
-                  height="100%"
-                  alt=""
-                />
-                <div
-                  class="section-four-left position-absolute top-50 start-0 translate-middle"
-                >
-                  <p>
-                    ВСЕ ПРОСТО<br />
-                    <b>НЕ НАДО</b><br />
-                    УСЛОЖНЯТЬ
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="section-four-title text-center mt-1">
-              <p>СИСТЕМА БЫСТРЫХ ВОЗНАГРАЖДЕНИЙ</p>
-              <p>CASHBACK НА ЛИЧНУЮ БАНКОВСКУЮ КАРТУ ПО НОМЕРУ ТЕЛЕФОНА</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  </div>
 
-    <section class="section-five">
-      <!-- Desktop -->
-      <div
-        class="container-fluid bg-skyblue justify-content-center d-lg-flex"
-        style="height: 347px"
-      >
-        <div class="row align-items-center h-100">
-          <div class="col">
-            <div class="box-content-section-five text-center">
-              <div class="box-content-image">
-                <img src="./src/img/icon10.png" alt="" />
-              </div>
-              <p>
-                революционный кешбэк на карту - от любой суммы до крупных выплат
-              </p>
-            </div>
-          </div>
-          <div class="col">
-            <div class="box-content-section-five text-center">
-              <div class="box-content-image">
-                <img src="./src/img/icon2.png" alt="" />
-              </div>
-              <p>
-                революционный кешбэк на карту - от любой суммы до крупных выплат
-              </p>
-            </div>
-          </div>
-          <div class="col">
-            <div class="box-content-section-five text-center">
-              <div class="box-content-image">
-                <img src="./src/img/icon11.png" alt="" />
-              </div>
-              <p>
-                революционный кешбэк на карту - от любой суммы до крупных выплат
-              </p>
-            </div>
-          </div>
-          <div class="col">
-            <div class="box-content-section-five text-center">
-              <div class="box-content-image">
-                <img src="./src/img/icon5.png" alt="" />
-              </div>
-              <p>
-                революционный кешбэк на карту - от любой суммы до крупных выплат
-              </p>
-            </div>
-          </div>
-          <div class="col">
-            <div class="box-content-section-five text-center">
-              <div class="box-content-image">
-                <img src="./src/img/icon12.png" alt="" />
-              </div>
-              <p>
-                революционный кешбэк на карту - от любой суммы до крупных выплат
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card mobile -->
-      <div class="container">
-        <div class="row my-accordion">
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseOne"
-                >
-                  Accordion Item #111
-                </button>
-              </h2>
-              <div
-                id="flush-collapseOne"
-                class="accordion-collapse collapse show"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  Placeholder content for this accordion, which is intended to
-                  demonstrate the <code>.accordion-flush</code> class. This is
-                  the first item’s accordion body.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseTwo"
-                >
-                  Accordion Item #2
-                </button>
-              </h2>
-              <div
-                id="flush-collapseTwo"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  Placeholder content for this accordion, which is intended to
-                  demonstrate the <code>.accordion-flush</code> class. This is
-                  the second item’s accordion body. Let’s imagine this being
-                  filled with some actual content.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  Accordion Item #3
-                </button>
-              </h2>
-              <div
-                id="flush-collapseThree"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  Placeholder content for this accordion, which is intended to
-                  demonstrate the <code>.accordion-flush</code> class. This is
-                  the third item’s accordion body. Nothing more exciting
-                  happening here in terms of content, but just filling up the
-                  space to make it look, at least at first glance, a bit more
-                  representative of how this would look in a real-world
-                  application.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="box-border">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1000 100"
-                preserveAspectRatio="none"
-              >
-                <path
-                  class="elementor-shape-fill"
-                  d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-                  style="fill: rgba(6, 21, 85, 0.87)"
-                ></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-      <div class="icon-mobile text-center" >
-        <img src="./src/img/icon2.png"  width="100px" height="100px" alt="">
-      </div>
-    <section class="section-six">
-      <div class="container">
-        <div class="row mt-5 mb-5">
-          <div class="col-12 col-lg-8 offset-lg-1">
-            <div
-              class="section-six-image d-flex justify-content-center position-relative"
-            >
-              <img
-                src="./src/img/image4.png"
-                width="100%"
-                height="100%"
-                alt=""
-              />
-              <div
-                class="section-six-image-content position-absolute top-50 start-100 translate-middle d-flex align-items-center"
-              >
-                <p class="m-0">
-                  ВЫБОР, КОТОРЫЙ
-                  <br />
-                  <b> ПРИЯТНО ДЕЛАТЬ</b>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-center ">
-          <div class="col-12 col-lg-5">
-            <div class="section-six-box">
-              <div
-                class="section-six-box-title rounded-top-4 d-flex align-items-center justify-content-center"
-              >
-                <p class="m-0">BREND2BUSINES</p>
-              </div>
-              <div class="section-six-box-desc rounded-bottom-4">
-                <p>МОТИВАЦИЯ ТОРГОВОГО ПЕРСОНАЛА</p>
-              </div>
-            </div>
-          </div>
-          <div
-              class="col-12 col-lg-2 d-flex align-items-center justify-content-center mb-md-3 mb-sm-5"
-          >
-            <div
-              class="section-six-and rounded-circle d-flex align-items-center justify-content-center"
-            >
-              <p class="m-0">ИЛИ</p>
-            </div>
-          </div>
-          <div class="col-12 col-lg-5 mb-md-5">
-            <div class="section-six-box  mb-md-5">
-              <div
-                class="section-six-box-title rounded-top-4 d-flex align-items-center justify-content-center"
-              >
-                <p class="m-0">BREND2BUSINES</p>
-              </div>
-              <div class="section-six-box-desc rounded-bottom-4">
-                <p>МОТИВАЦИЯ ТОРГОВОГО ПЕРСОНАЛА</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5 mb-5">
-          <div class="col-12">
-            <div class="box-border">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1000 100"
-                preserveAspectRatio="none"
-              >
-                <path
-                  class="elementor-shape-fill"
-                  d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-                  style="fill: rgba(6, 21, 85, 0.87)"
-                ></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-seven mb-5">
-      <div class="container">
-        <div class="row mb-5 gy-1 gx-2">
-          <div class="col-12 col-lg-4 offset-lg-1 d-flex align-items-end justify-content-center">
-            <div class="section-seven-box ">
-              <div class="section-seven-box-title rounded-4 p-3">
-                <p>“Если у Вас много собственных сотрудников,
-                  Вы привлекаете персонал для выполнения бизнес задач,
-                  Вы работаете с партнерами, дилерами, дистрибуторами по всей РФ и в других странах СНГ, то Вам просто необходим эффективный инструмент коммуникации со всеми участниками для увеличения продаж.”</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-7" >
-            <div
-              class="section-seven-box-image d-flex  justify-content-center position-relative me-lg-5"
-            >
-              <img src="./src/img/image5.png" alt="" />
-              <div class="section-seven-box-image-content position-absolute top-0 start-0 translate-middle-y d-flex align-items-center">
-                <p>
-                  МЫ ПРЕВРАЩАЕМ
-                  <br />
-                  <b>РАБОТУ</b><br />
-
-                  В УДОВОЛЬСТВИЕ
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row ms-lg-5">
-          <div class="col-12">
-            <div class="section-seven-title">
-              <p>Система быстрых вознаграждений</p>
-              <p>для клиентов в сфере корпоративного бизнеса, так и для компаний, производящих
-                товары народного потребления - от продавца до покупателя, от сотрудника до заказчика.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-nine mb-5" ">
-      <div class="container-fluid bg-skyblue-nine margins" style="height: 300px; ">
-        <div class="row">
-          <div class="col-12 text-center mt-5 mb-3">
-            <h1>выбирайте mybonusreward brand2busines:
-            </h1>
-          </div>
-          
-        </div>
-        <div class="container">
-          <div class="row" >
-            <div class="col-12 col-lg-5">
-              <div class="section-nine-box d-flex justify-content-center align-items-center">
-                <img src="./src/img/icon2.png" alt="">
-                <h5>совершайте межбанковские переводы в любое время – достаточно номера мобильного телефона участника или номера личной карты</h4>
-              </div>
-            </div>
-            <div
-            class="col-12 col-lg-2 d-flex align-items-center justify-content-center mb-md-3 mb-sm-5"
-          >
-            <div
-              class="section-nine-and rounded-circle d-flex align-items-center justify-content-center"
-            >
-              <p class="m-0">&</p>
-            </div>
-          </div>
-            <div class="col-12 col-lg-5">
-              <div class="section-nine-box d-flex justify-content-center align-items-center">
-                <img src="./src/img/icon2.png" alt="">
-                <h5>совершайте межбанковские переводы в любое время – достаточно номера мобильного телефона участника или номера личной карты</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </section>
-     <section class="section-seven mb-5">
-      <div class="container">
-        <div class="row mb-5 gy-1 gx-2">
-           <div class="col-12 col-lg-7  offset-lg-1 ">
-            <div
-              class="section-seven-box-image d-flex justify-content-center position-relative me-lg-5"
-            >
-              <img src="./src/img/image5.png" alt="" />
-                <div class=" section-nine-box-image-content position-absolute top-0 end-0 translate-middle-y d-flex align-items-center">
-                <p>
-                  МЫ ПРЕВРАЩАЕМ
-                  <br />
-                  <b>РАБОТУ</b><br />
-
-                  В УДОВОЛЬСТВИЕ
-                </p>
-                </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4 d-flex align-items-end justify-content-center">
-            <div class="section-seven-box ">
-              <div class="section-seven-box-title rounded-4 p-3">
-                <p>“Если у Вас много собственных сотрудников,
-                  Вы привлекаете персонал для выполнения бизнес задач,
-                  Вы работаете с партнерами, дилерами, дистрибуторами по всей РФ и в других странах СНГ, то Вам просто необходим эффективный инструмент коммуникации со всеми участниками для увеличения продаж.”</p>
-              </div>
-            </div>
-          </div>
-         
-        </div>
-        <div class="row ms-lg-5">
-          <div class="col-12">
-            <div class="section-seven-title">
-              <p>Система быстрых вознаграждений</p>
-              <p>для клиентов в сфере корпоративного бизнеса, так и для компаний, производящих
-                товары народного потребления - от продавца до покупателя, от сотрудника до заказчика.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-nine mb-5">
-      <div class="container-fluid bg-skyblue-nine" style="height: 300px;">
-        <div class="row">
-          <div class="col-12 text-center mt-5 mb-3">
-            <h1>выбирайте mybonusreward brand2busines:
-            </h1>
-          </div>
-          
-        </div>
-        <div class="container ">
-          <div class="row ">
-            <div class="col-12 col-lg-5 ">
-              <div class="section-nine-box d-flex justify-content-center align-items-center">
-                <img src="./src/img/icon2.png" alt="">
-                <h5>совершайте межбанковские переводы в любое время – достаточно номера мобильного телефона участника или номера личной карты</h4>
-              </div>
-            </div>
-            <div
-            class="col-12 col-lg-2 d-flex align-items-center justify-content-center mb-md-3 mb-sm-5"
-          >
-            <div
-              class="section-nine-and rounded-circle d-flex align-items-center justify-content-center"
-            >
-              <p class="m-0">&</p>
-            </div>
-          </div>
-            <div class="col-12 col-lg-5 ">
-              <div class="section-nine-box d-flex justify-content-center align-items-center ">
-                <img src="./src/img/icon2.png" alt="">
-                <h5>совершайте межбанковские переводы в любое время – достаточно номера мобильного телефона участника или номера личной карты</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </section>
-    <section class="section-eight">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-eight-image">
-              <img src="./src/img/9-image.png" alt="">
-              <div class="section-eight-image-content position-absolute top-00 start-0 d-flex align-items-center">
-                <p>
-                  КЛИЕНТЫ ЛЮБЯТ
-                  <br />
-                  <b>ВОЗВРАЩАТЬСЯ</b><br />
-                  СЮДА
-                </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-ten">
-      <div class="container-fluid bg-skyblue mb-5 border-bottom " style="height: 250px;">
-        <div class="row"></div>
-      </div>
-      <div class="container mb-5" style="margin-top: -62px;">
-         <div class="box-border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1000 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                class="elementor-shape-fill"
-                d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-                style="fill: rgba(6, 21, 85, 0.87)"
-              ></path>
-            </svg>
-          </div>
-      </div>
-  
-    </section>
-    <section class="section-eleven mt-5 mb-5">
-      <div class="container ">
-        <div class="row  justify-content-center">
-          <div class="col-12 col-lg-8">
-            <div class="section-eleven-title ">
-               <p>МЫ ВОЗНАГРАЖДАЕМ</p>
-               <p>НАС НАГРАЖДАЮТ</p>
-            </div>
-           
-          </div>
-        </div>
-        <div class="row text-center mt-5 text-info">
-          <div class="col-6"><h2>2020 LOYALTY AWARD RUSSIAИ MARTECH STARS</h2></div>
-          <div class="col-6"><h2 class="fs-2">2021 ПРЕМИЯ DIGITAL LEADERS <span style="color: rgba(9, 9, 91, 0.788);"> <span class="fw-medium">НОМИНАЦИИ:</span> <br> <span class="fs-3">Smart решение года и портальное решение </span></span></h2></div>
-
-        </div>
-        <div class="row ">
-          <div class="col-12 col-lg-6">
-            <img src="./src/img/9_v2.png" width="100%" alt="">
-          </div>
-          <div class="col-12 col-lg-6  ">
-            <img src="./src/img/9_v3.png" width="100%" alt="">
-          </div>
-        </div>
-      </div>
-    </section>
-    <div class="container">
-      <div class="row mt-5 mb-5">
-          <div class="col-12">
-            <div class="box-border">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                <path class="elementor-shape-fill" d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z" style="fill: rgba(6, 21, 85, 0.87)"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-    </div>
-    <section class="section-twelve">
-       <div class="container border-h box-container">
-      <div class="row">
-        <div class="col-12 col-lg-6">
-          <div class="box-content">
-            <div class="box-content-title">
-              <p>
-                MY <br />
-                <b>BONUS</b><br />
-                REWARD
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-6">
-          <div class="box-image">
-            <img src="./src/img/10.png" width="100%" height="100%" alt="" />
-          </div>
-        </div>
-        <div class="col-12 col-lg-6">
-          <div class="box-widget">
-            <div class="box-widget-title">
-              <p>БОЛЕЕ 20 ЛЕТ</p>
-              <p>МЫ ВОЗНАГРАЖДАЕМ <br />ЛЮДЕЙ</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </section>
-
-    Contact form 
-    <form method="post" action="{% url 'main:main_page' %}">
-      {% csrf_token %}
-      
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Send</button>
-    </form>
+  <!-- Modal / -->
+</section>
 {% endblock %}

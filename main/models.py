@@ -66,11 +66,11 @@ class ThirdContainerCards(BaseCards):
     
 
 class FourthContainer(BaseModel):
-    description = models.CharField(verbose_name='Описание', max_length=100)
+    description = models.CharField(verbose_name='Описание', max_length=500)
     class Meta:
         verbose_name = "04 Четвертый контейнер"
         verbose_name_plural = "04 Четвертый контейнер"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.title
@@ -176,6 +176,11 @@ class SeventhContainerCards(models.Model):
 
 class EighthContainer(BaseModel):
     """ Восьмой контейнер, наследуется от BaseModel """
+    mobile_description = models.CharField(
+        verbose_name='Описание для мобильного телефона', 
+        max_length=1000, 
+        blank=True 
+        )
     class Meta:
         verbose_name = "08 Восьмой контейнер"
         verbose_name_plural = "08 Восьмой контейнер"
@@ -191,7 +196,7 @@ class NinthContainer(BaseModel):
     class Meta:
         verbose_name = "09 Девятый контейнер"
         verbose_name_plural = "09 Девятый контейнер"
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return self.title

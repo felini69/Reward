@@ -3,6 +3,7 @@ from contact.forms import ContactForm
 from django.shortcuts import redirect
 from django.views import View
 from menu.models import MenuItem, FooterMenu
+from extra.models import Logo, Analytics
 from datetime import date
 from .models import (
     FirstContainer, 
@@ -22,8 +23,9 @@ def main_page(request):
                         .order_by('order') \
                         .prefetch_related('children')
     footer            = FooterMenu.objects.all().first()
+    analytic          = Analytics.objects.filter(is_active=True)
 
-    first_container   = FirstContainer.objects.filter(is_active=True)
+    first_container   = FirstContainer.objects.filter(is_active=True).first()
     second_container  = SecondContainer.objects.filter(is_active=True) \
                        .prefetch_related('cards') \
                        .order_by('created_at')
@@ -40,14 +42,20 @@ def main_page(request):
                         .prefetch_related('cards') \
                         .order_by('created_at')
     seventh_container = SeventhContainer.objects.filter(is_active=True).order_by('created_at')
-    eighth_container  = EighthContainer.objects.filter(is_active=True).order_by('created_at')
+    eighth_container  = EighthContainer.objects.filter(is_active=True).order_by('created_at').first()
     ninth_container   = NinthContainer.objects.filter(is_active=True).order_by('created_at')
-    tenth_container   = TenthContainer.objects.filter(is_active=True).order_by('created_at')
+    tenth_container   = TenthContainer.objects.filter(is_active=True).order_by('created_at').first()
     
     # Process the contact form submission
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        print(form)
         if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            company = form.cleaned_data['company']
+            message = form.cleaned_data['message']
+            print(f"Received contact form submission: {name}, {email}, {company}, {message}")
             form.save()
             return redirect('main:main_page')
     else:
@@ -56,10 +64,17 @@ def main_page(request):
     # Current year for footer
     current_year = date.today().year  
 
+    # Logo for header and footer
+    logo_header = Logo.objects.filter(position='header', is_active=True).first()
+    logo_footer = Logo.objects.filter(position='footer', is_active=True).first()
+
     context = {
         'form': form,
         'menu': menu,
         'footer': footer,
+        'analytic': analytic,
+        'logo_header': logo_header,
+        'logo_footer': logo_footer,
         'current_year': current_year,
         'first_container': first_container,
         'second_container': second_container,

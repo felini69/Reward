@@ -1,6 +1,7 @@
+import os
 from django.urls import reverse_lazy
 from pathlib import Path
-import os
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,18 +11,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+@wxe(4-(8z56=(3d4$d^hll-iny)uu8y8@9gw$hgy&l$r)ovl'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['bonus.lumos.com.ge', 'www.bonus.lumos.com.ge']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
-
 INSTALLED_APPS = [
-
     'unfold',
     "unfold.contrib.filters",
     "unfold.contrib.inlines",
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
     'main',
     'menu',
     'contact',
-
+    'extra',
 
     ### 3rd Party Apps ###
     'tinymce',
@@ -80,11 +79,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3')
+    )
 }
 
 
@@ -110,9 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = config('LANGUAGE_CODE', default='en-us')
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = config('TIME_ZONE', default='UTC')
 
 USE_I18N = True
 
@@ -126,12 +125,14 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/')
 ]
-
+ 
 STATIC_ROOT = '/home/batumibo/bonus.lumos.com.ge/static/'
 MEDIA_ROOT = '/home/batumibo/bonus.lumos.com.ge/media/'
-
 MEDIA_URL = '/media/'
 
+
+# MEDIA_ROOT = os.path.join(BASE_DIR / "media")
+# MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -228,17 +229,22 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Логотип",
-                        "link": reverse_lazy("admin:menu_logo_changelist"),
+                        "link": reverse_lazy("admin:extra_logo_changelist"),
                     },
                     {
                         "title": "Фавикон",
-                        "link": reverse_lazy("admin:menu_favicon_changelist"),
+                        "link": reverse_lazy("admin:extra_favicon_changelist"),
+                    },
+                    {
+                        "title": "Аналитика",
+                        "link": reverse_lazy("admin:extra_analytics_changelist"),
                     },
                 ],
             },
         ],
     }
 }
+
 
 
 TINYMCE_DEFAULT_CONFIG = {

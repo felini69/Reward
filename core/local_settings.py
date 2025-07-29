@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+@wxe(4-(8z56=(3d4$d^hll-iny)uu8y8@9gw$hgy&l$r)ovl'
+SECRET_KEY = 'django-insecure-+@wxe(4-(8z56=jk;jn;sldknLk(3d4$d^hll-iny)uu8y8@9gw$hgy&l$r)ovl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'main',
     'menu',
     'contact',
+    'extra',
 
     ### 3rd Party Apps ###
     'tinymce',
@@ -224,11 +225,15 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Логотип",
-                        "link": reverse_lazy("admin:menu_logo_changelist"),
+                        "link": reverse_lazy("admin:extra_logo_changelist"),
                     },
                     {
                         "title": "Фавикон",
-                        "link": reverse_lazy("admin:menu_favicon_changelist"),
+                        "link": reverse_lazy("admin:extra_favicon_changelist"),
+                    },
+                    {
+                        "title": "Аналитика",
+                        "link": reverse_lazy("admin:extra_analytics_changelist"),
                     },
                 ],
             },

@@ -169,6 +169,9 @@ class SeventhContainerAdmin(ModelAdmin, FormfieldesMixin):
 class EighthContainerAdmin(ModelAdmin, FormfieldesMixin):
     list_display = ('strip_title', 'created_at', 'is_active',)
     list_editable = ('is_active',)
+    # fields = (
+    #     ''
+    # )
 
     formfield_overrides = FormfieldesMixin.formfield_overrides
 

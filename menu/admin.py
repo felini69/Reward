@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MenuItem, FooterMenu, Logo, Favicon
+from .models import MenuItem, FooterMenu
 from .forms import MenuForm
 from main.mixins import FormfieldesMixin
 from unfold.admin import ModelAdmin
@@ -19,17 +19,3 @@ class MenuAdmin(DjangoMpttAdmin, ModelAdmin):
 @admin.register(FooterMenu)
 class FooterMenuAdmin(ModelAdmin, FormfieldesMixin):
     formfield_overrides = FormfieldesMixin.formfield_overrides
-
-
-
-@admin.register(Logo)
-class LogoAdmin(ModelAdmin, FormfieldesMixin):
-    list_display = ('title', 'created_at', 'is_active',)
-    list_editable = ('is_active',)
-
-
-
-@admin.register(Favicon)
-class FaviconAdmin(ModelAdmin, FormfieldesMixin):
-    list_display = ('created_at', 'is_active',)
-    list_editable = ('is_active',)
