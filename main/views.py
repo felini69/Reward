@@ -3,7 +3,7 @@ from contact.forms import ContactForm
 from django.shortcuts import redirect
 from django.views import View
 from menu.models import MenuItem, FooterMenu
-from extra.models import Logo, Analytics
+from extra.models import Logo, Analytics, Terms
 from datetime import date
 from .models import (
     FirstContainer, 

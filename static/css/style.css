@@ -1666,3 +1666,26 @@ body {
 .accordion-button:not(.collapsed) {
     color: #00C3DF;
 }
+.icons {
+  margin-top: 55px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+.icons img {
+  width: 172px;
+  height: 49px;
+  object-fit: contain;
+}
+
+@media (max-width: 1025px) {
+  .icons {
+    gap: 46px;
+  }
+  .icons img {
+    width: 150px;
+    height: 49px;
+  }
+}

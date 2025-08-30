@@ -224,6 +224,10 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
+                        "title": "Условия использования",
+                        "link": reverse_lazy("admin:extra_terms_changelist"),
+                    },
+                    {
                         "title": "Логотип",
                         "link": reverse_lazy("admin:extra_logo_changelist"),
                     },
@@ -268,6 +272,6 @@ TINYMCE_DEFAULT_CONFIG = {
         'Times New Roman=times new roman,times;'
         'Verdana=verdana,geneva;'
     ),
-    "custom_undo_redo_levels": 10,
+    "custom_undo_redo_levels": 20,
     "language": "ru-RU",  # To force a specific language instead of the Django current language.
 }

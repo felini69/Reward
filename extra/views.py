@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Terms
 
-# Create your views here.
+def terms_view(request):
+    terms = Terms.objects.filter(is_active=True).first()
+    return render(request, 'extra/terms.html', {'terms': terms})

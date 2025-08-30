@@ -4,4 +4,6 @@ from .views import *
 app_name = 'extra'
 
 
-urlpatterns = []
+urlpatterns = [
+    path('terms/', terms_view, name='terms'),
+]

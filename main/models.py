@@ -174,6 +174,7 @@ class SeventhContainerCards(models.Model):
         return self.first_title
 
 
+
 class EighthContainer(BaseModel):
     """ Восьмой контейнер, наследуется от BaseModel """
     mobile_description = models.CharField(
@@ -188,8 +189,7 @@ class EighthContainer(BaseModel):
 
     def __str__(self):
         return self.title
-
-
+    
 
 class NinthContainer(BaseModel):
     """ Девятый контейнер наследуется от BaseModel """

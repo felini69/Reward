@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Условия использования</h2>
+            <p>{{ terms.content|safe }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
